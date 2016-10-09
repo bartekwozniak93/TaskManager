@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+{% block content %}
+
+	<h2>Register form</h2>
+	{{result}}
+	<form action="{{ path_for('task') }}" method="post" class="form-horizontal">
+		<div class="form-group">
+			<label class="control-label col-sm-2" for="task_name">task_name:</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" name="task_name" placeholder="Enter task_name">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label col-sm-2" for="task_description">task_description:</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" name="task_description" placeholder="Enter task_description">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label col-sm-2" for="task_type">task_type:</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" name="task_type" placeholder="Enter task_type">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label col-sm-2" for="amount">amount:</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" name="amount" placeholder="Enter amount">
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-10">
+				<button type="submit" class="btn btn-default">Submit</button>
+			</div>
+		</div>
+	</form>
+
+
+{% endblock %}
