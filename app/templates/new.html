@@ -1,6 +1,16 @@
 {% extends "layout.html" %}
 
 {% block content %}
-NEW VIEW!
-{{value.title}}
+<table>
+	<tr>
+		<td>Title</td>
+		<td>Description</td>
+	</tr>
+	{% for item in myarray %}
+	<tr>
+		<td>{{ item.title }}</td>
+		<td>{{ item.description }}</td>
+	</tr>
+	{% endfor %}
+</table>
 {% endblock %}

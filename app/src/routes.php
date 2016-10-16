@@ -90,8 +90,8 @@ function gete(){
 
 $app->get('/new', function ($request, $response, $args) {
 	$login_user = $_SESSION['login_user'];
-	$value=getNew();
-	return $this->view->render($response, 'new.html', ['login_user' => $login_user, 'value' => $value]);
+	$myarray=getCategories();
+	return $this->view->render($response, 'new.html', ['login_user' => $login_user, 'myarray' => $myarray]);
 })->setName('new');
 
 

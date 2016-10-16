@@ -3,7 +3,7 @@
 $configs = include('../config.php');
 
 function getDB() {
-	$dbConnection = pg_connect('host=localhost port=5432 dbname=projectdb user=postgres password=cs2102')
+	$dbConnection = pg_connect('host=localhost port=5432 dbname=postgres user=postgres password=cs2102') 
 	or die('Could not connect: ' . pg_last_error());
 	$setPath = pg_query($dbConnection, "SET search_path TO project");
 	if (!$setPath) {
@@ -79,12 +79,24 @@ function getTaskCategoriesDB() {
 
 function postTaskCategoryDB($taskcat) {
 	$dbconn = getDB();
-	$query = "INSERT INTO task_category (category)
+	$query = "INSERT INTO task_category (name)
 	VALUES ('$taskcat->taskCategory')";
 	$result = pg_query($dbconn, $query) 
 	or die('Post failed: ' . pg_last_error());
 	pg_close($dbconn);
 	return $result;
+}
+
+function getCategoriesDB(){
+	$myarray = array(); 
+	for ($i = 1; $i <= 10; $i++) {
+    	$element =  array(
+			'title' => "This is title",
+			'description' => "This is description.",
+		);
+		array_push($myarray, $element);
+	}
+	return $myarray;
 }
 
 

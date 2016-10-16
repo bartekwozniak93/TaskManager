@@ -13,11 +13,5 @@ function postTask($task) {
 	return postTaskDB($task);
 }
 
-function getNew(){
-	$value =  array(
-		'title' => "titleee"
-	);
-	return $value;
-}
 
 ?>
