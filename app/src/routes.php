@@ -1,9 +1,8 @@
 <?php
 // Routes
-
-$users = include('../logic/users.php');
-$tasks = include('../logic/tasks.php');
-$taskcategory = include('../logic/taskcategory.php');
+include('../logic/users.php');
+include('../logic/tasks.php');
+include('../logic/taskcategory.php');
 
 // Define named route
 $app->get('/register', function ($request, $response, $args) {
@@ -22,7 +21,7 @@ $app->post('/register', function ($request, $response, $args) {
 		'confirmPass' => $form_data['confirmPass'],
 		'contactNum' => $form_data['contactNum']  
 		);
-	$result = $users.postUser($user);
+	$result = postUser($user);
 
 	return $this->view->render($response, 'register.html', [
 		'result' => $result, 'login_user' => $login_user
@@ -41,7 +40,7 @@ $app->post('/login', function ($request, $response, $args) {
 		'email' => $form_data['email'],
 		'password' => $form_data['password']
 		);
-	$result = $users.loginUser($user);
+	$result = loginUser($user);
 	if($result == True){
 		return $this->view->render($response, 'main.html', ['login_user' => $login_user]);
 	}
@@ -60,7 +59,7 @@ $app->get('/logout', function ($request, $response, $args) {
 
 $app->get('/main', function ($request, $response, $args) {
 	$login_user = $_SESSION['login_user'];
-	$result= $tasks.getUserTasks();
+	$result= getUserTasks();
 	return $this->view->render($response, 'main.html', ['result' => $result,'login_user' => $login_user]);
 })->setName('main');
 
@@ -70,7 +69,7 @@ $app->post('/category', function ($request, $response, $args) {
 	$taskcat = (object) array(
 		'taskCategory' => $form_data['category']
 		);
-	$result = $taskcategory.postTaskCategory($taskcat);
+	$result = postTaskCategory($taskcat);
 	return $this->view->render($response, 'taskcategory.html', [
 		'result' => $result, 'login_user' => $login_user
 		])
@@ -84,10 +83,14 @@ $app->get('/category', function ($request, $response, $args) {
 	return $this->view->render($response, 'taskcategory.html', ['login_user' => $login_user]);
 })->setName('category');
 
+function gete(){
+	return $arrayName = array('title' => "titlefadfas" );
+}
+
 
 $app->get('/new', function ($request, $response, $args) {
 	$login_user = $_SESSION['login_user'];
-	$value = "MY VALUE";
+	$value=getNew();
 	return $this->view->render($response, 'new.html', ['login_user' => $login_user, 'value' => $value]);
 })->setName('new');
 
@@ -102,7 +105,7 @@ $app->post('/task', function ($request, $response, $args) {
 		'task_type' => $form_data['task_type'],
 		'amount' => $form_data['amount']
 		);
-	$result = $tasks.postTask($task);
+	$result = postTask($task);
 	return $this->view->render($response, 'task.html', [
 		'result' => $result, 'login_user' => $login_user
 		])

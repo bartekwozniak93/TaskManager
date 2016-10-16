@@ -1,13 +1,13 @@
 <?php
 
-$datalayer = include_once('../datalayer/database.php');
+include_once('../datalayer/database.php');
 
 function getTaskCategories() {
-	return $datalayer.getTaskCategoriesDB();
+	return getTaskCategoriesDB();
 }
 
 function postTaskCategory($taskcat) {
-	return $datalayer.postTaskCategoryDB($taskcat);
+	return postTaskCategoryDB($taskcat);
 }
 
 ?>
