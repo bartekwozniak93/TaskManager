@@ -3,7 +3,7 @@
 $configs = include('../config.php');
 
 function getDB() {
-	$dbConnection = pg_connect('host=localhost port=5432 dbname=postgres user=postgres password=Martynka123!')
+	$dbConnection = pg_connect('host=localhost port=5432 dbname=projectdb user=postgres password=cs2102')
 	or die('Could not connect: ' . pg_last_error());
 	$setPath = pg_query($dbConnection, "SET search_path TO project");
 	if (!$setPath) {
@@ -24,8 +24,8 @@ function getUsersDB() {
 
 function postUserDB($user) {
 	$dbconn = getDB();
-	$query = "INSERT INTO account (password, first_name, last_name, email, contact_num)
-	VALUES ('$user->password', '$user->firstName', '$user->lastName', '$user->email', '$user->contactNum')";
+	$query = "INSERT INTO account (email, password, first_name, last_name, contact_num)
+	VALUES ('$user->email', '$user->password', '$user->firstName', '$user->lastName', '$user->contactNum')";
 	$result = pg_query($dbconn, $query) 
 	or die('Insert failed: ' . pg_last_error());
 	pg_close($dbconn);
@@ -60,8 +60,8 @@ function getUserTasksDB($login_user) {
 
 function postTaskDB($task) {
 	$dbconn = getDB();
-	$query = "INSERT INTO task (task_name, task_description	, task_type, amount, created_by)
-	VALUES ('$task->task_name', '$task->task_description', '$task->task_type', '$task->amount', '$task->login_user')";
+	$query = "INSERT INTO task (name, description, amount, category, created_by)
+	VALUES ('$task->task_name', '$task->task_description', $task->amount, '$task->task_type', '$task->login_user')";
 	$result = pg_query($dbconn, $query) 
 	or die('Post failed: ' . pg_last_error());
 	pg_close($dbconn);
@@ -70,7 +70,7 @@ function postTaskDB($task) {
 
 function getTaskCategoriesDB() {
 	$dbconn = getDB();
-	$query = "SELECT * FROM taskcategory;";
+	$query = "SELECT * FROM task_category;";
 	$result = pg_query($dbconn, $query) 
 	or die('Select failed: ' . pg_last_error());
 	pg_close($dbconn);
@@ -79,7 +79,7 @@ function getTaskCategoriesDB() {
 
 function postTaskCategoryDB($taskcat) {
 	$dbconn = getDB();
-	$query = "INSERT INTO taskcategory (category)
+	$query = "INSERT INTO task_category (category)
 	VALUES ('$taskcat->taskCategory')";
 	$result = pg_query($dbconn, $query) 
 	or die('Post failed: ' . pg_last_error());
