@@ -118,6 +118,40 @@ $app->get('/task', function ($request, $response, $args) {
 	$login_user = $_SESSION['login_user'];
 	return $this->view->render($response, 'task.html', ['login_user' => $login_user]);
 })->setName('task');
+
+
+//MY ADMIN PORTION
+
+$app->get('/admin', function ($request, $response, $args) {
+	$login_user = $_SESSION['login_user'];
+	$myarray=getCategories();
+	return $this->view->render($response, 'admin.html', ['login_user' => $login_user, 'myarray' => $myarray]);
+})->setName('admin');
+
+
+
+$app->post('/admin', function ($request, $response, $args) {
+
+$form_data = $request->getParsedBody();
+$buttonselected = $form_data['modify'];  //Check to see which button is clicked
+$category = $form_data['category']; //Get the corresponding category
+
+if($buttonselected == "edit")
+{
+	//Not done yet
+}
+else if ($buttonselected == "delete")
+{
+	$result = deleteCategories($category); //execute deleteCategories @ logic layer
+	$myarray = getCategories(); //retrieve the remaining categories
+
+	//return the same view
+	return $this->view->render($response, 'admin.html', ['myarray' => $myarray]);
+}
+
+})->setName('admin');
+
+
 ?>
 
 
