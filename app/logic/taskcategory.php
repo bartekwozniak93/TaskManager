@@ -1,22 +1,24 @@
 <?php
 
-include_once('../datalayer/database.php');
+include_once('../datalayer/taskcategory.php');
 
-function getTaskCategories() {
-	return getTaskCategoriesDB();
+function postCategory($taskcat) {
+	return postCategoryDB($taskcat);
 }
 
-function postTaskCategory($taskcat) {
-	return postTaskCategoryDB($taskcat);
-}
-
-
-//ADMIN PORTION
 function getCategories(){
 	return getCategoriesDB();
 }
 
-function deleteCategories($taskcat){
-	return deleteCategoriesDB($taskcat);
+function deleteCategory($categoryName){
+	return deleteCategoryDB($categoryName);
+}
+
+function getCategory($categoryName) {
+	return getCategoryDB($categoryName);
+}
+
+function editCategory($taskcat, $categoryName){
+	return editCategoryDB($taskcat, $categoryName);
 }
 ?>

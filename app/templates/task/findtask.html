@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<p>{{result}}</p>
+<div class="container">
+	<p></p>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Description</th>
+				<th>Amount</th>
+				<th>Category</th>
+				<th>Status</th>
+				<th>Created by</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for task in tasks %}
+			<tr>
+				<td>{{ task.name }}</td>
+				<td>{{ task.description }}</td>
+				<td>{{ task.amount }}</td>
+				<td>{{ task.category }}</td>
+				<td>{{ task.status }}</td>
+				<td>{{ task.created_by }}</td>
+				<td>
+					<a class="btn btn-primary" href="{{ path_for('viewtask', {'id':task.id}) }}" role="button">View</a>
+				<td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+{% endblock %}

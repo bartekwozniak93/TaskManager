@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h2>All users</h2>
+<p>{{result}}</p>
+<div class="container">
+	<p></p>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Email</th>
+				<th>Firstname</th>
+				<th>Lastname</th>
+				<th>ContactNum</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for user in users %}
+			<tr>
+				<td>{{ user.email }}</td>
+				<td>{{ user.first_name }}</td>
+				<td>{{ user.last_name }}</td>
+				<td>{{ user.contact_num}}</td>
+				<td><a class="btn btn-primary" href="{{ path_for('edituser', {'email':user.email}) }}" role="button">Edit</a></td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+{% endblock %}
+

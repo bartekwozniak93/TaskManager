@@ -9,31 +9,35 @@
   {% endblock %}
 </head>
 <body>
-  {% block nav %}
   <nav class="navbar navbar-inverse">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="#">Share tasks</a>
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">Share tasks</a>
       </div>
       <ul class="nav navbar-nav">
-          <li><a href="{{ path_for('main') }}">Wall</a></li>
-          <li><a href="{{ path_for('category') }}">Categories</a></li> 
-          <li><a href="{{ path_for('task') }}">Tasks</a></li> 
-          <li><a href="{{ path_for('new') }}">New</a></li> 
+        {% if login_user %}
+        <li><a href="{{ path_for('mytasks') }}">My Tasks</a></li>
+        <li><a href="{{ path_for('newtask') }}">New Task</a></li> 
+        <li><a href="{{ path_for('findtask') }}">Find task</a></li>
+        <li><a href="{{ path_for('findtask_interactive') }}">Find task [INTERCATIIVE]</a></li>
+        <li><a href="{{ path_for('categories') }}">Categories</a></li>
+        <li><a href="{{ path_for('allusers') }}">All users</a></li>
+        {% endif %}
       </ul>
       <ul class="nav navbar-nav navbar-right">      
-            {% if login_user %}
-                <li><a href="{{ path_for('logout') }}"><span class="glyphicon glyphicon-user"></span>Log out</a></li>
-            {% else %}
-               <li><a href="{{ path_for('register') }}"><span class="glyphicon glyphicon-user"></span>Sign Up</a></li>
-               <li><a href="{{ path_for('login') }}"><span class="glyphicon glyphicon-log-in"></span>Log in</a></li>
-            {% endif %}
-    </ul>
-</div>
-</nav>
-{% endblock %}
-<div id="content">{% block content %}
-  {% endblock %}</div>
-<div id="footer">Copyright 2016</div>
+        {% if login_user %}
+        <li><a href="{{ path_for('logout') }}"><span class="glyphicon glyphicon-user"></span>Log out</a></li>
+        {% else %}
+        <li><a href="{{ path_for('register') }}"><span class="glyphicon glyphicon-user"></span>Sign Up</a></li>
+        <li><a href="{{ path_for('login') }}"><span class="glyphicon glyphicon-log-in"></span>Log in</a></li>
+        {% endif %}
+      </ul>
+    </div>
+  </nav>
+  <div id="content">
+    {% block content %}
+    {% endblock %}
+  </div>
+  <div id="footer">Copyright 2016</div>
 </body>
 </html>

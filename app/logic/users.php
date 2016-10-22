@@ -1,17 +1,22 @@
 <?php
 
-include_once('../datalayer/database.php');
+include_once('../datalayer/users.php');
 
 function loginUser($user) {
 	$result = loginUserDB($user);
 	if($result==False)
-		return "Login or password are not correct!";
-	$_SESSION['login_user']=$user->email;
+		$_SESSION['login_user']='';
+	else
+		$_SESSION['login_user']=$user->email;
 	return $result;
 }
 
 function getUsers() {
 	return getUsersDB();
+}
+
+function getUser($userEmail) {
+	return getUserDB($userEmail);
 }
 
 function postUser($user) {
@@ -22,4 +27,7 @@ function postUser($user) {
 	return postUserDB($user);
 }
 
+function editUser($userToEdit) {
+	return editUserDB($userToEdit);
+}
 ?>

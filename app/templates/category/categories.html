@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h2>Categories</h2>
+<a class="btn btn-primary" href="{{ path_for('newcategory') }}" role="button">New category</a>
+{{result}}
+<div class="container">
+	<p></p>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for category in categories %}
+			<tr>
+				<td>{{ category.name }}</td>
+				<td>
+					<a class="btn btn-primary" href="{{ path_for('editcategory', {'name':category.name}) }}" role="button">Edit</a>
+					<a class="btn btn-primary" href="{{ path_for('deletecategory', {'name':category.name}) }}" role="button">Delete</a>
+				<td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+{% endblock %}

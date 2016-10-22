@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h2>My own task</h2>
+<a class="btn btn-primary" href="{{ path_for('newtask') }}" role="button">New task</a>
+<p>{{result}}</p>
+<div class="container">
+	<p></p>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Description</th>
+				<th>Amount</th>
+				<th>Category</th>
+				<th>Status</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for task in tasks %}
+			<tr>
+				<td>{{ task.name }}</td>
+				<td>{{ task.description }}</td>
+				<td>{{ task.amount }}</td>
+				<td>{{ task.category }}</td>
+				<td>{{ task.status }}</td>
+				<td>
+					{% if task.status=="New" %}
+						<a class="btn btn-primary" href="{{ path_for('edittask', {'id':task.id}) }}" role="button">Edit</a>
+						<a class="btn btn-primary" href="{{ path_for('deletetask', {'id':task.id}) }}" role="button">Delete</a>
+						<a class="btn btn-primary" href="{{ path_for('chooseuser', {'id':task.id}) }}" role="button">Choose user</a>
+					{% endif %}
+				<td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+{% endblock %}
